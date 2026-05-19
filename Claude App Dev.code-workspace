@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "name": "FarmingPal",
+      "path": "FarmingPal"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": true
+  }
+}
