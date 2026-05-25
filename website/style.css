@@ -419,6 +419,8 @@ body {
   min-width: 200px;
 }
 .store-btn:hover { background: #222; }
+.store-btn-web { background: #2d6a2d; border-color: #2d6a2d; }
+.store-btn-web:hover { background: #245824; }
 .store-icon { font-size: 28px; }
 .store-text { display: flex; flex-direction: column; text-align: left; }
 .store-sub  { font-size: 11px; font-weight: 400; color: rgba(255,255,255,.7); }
