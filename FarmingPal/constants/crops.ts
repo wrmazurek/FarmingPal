@@ -6,6 +6,8 @@ export const CROPS: Crop[] = [
   { id: 'canola',     name: 'Canola',    unit: 'bu' },
   { id: 'oats',       name: 'Oats',      unit: 'bu' },
   { id: 'barley',     name: 'Barley',    unit: 'bu' },
+  { id: 'peas',       name: 'Peas',      unit: 'bu' },
+  { id: 'lentils',    name: 'Lentils',   unit: 'bu' },
   { id: 'wheat-hrw',  name: 'Hard Red Winter',  unit: 'bu' },
   { id: 'wheat-hrs',  name: 'Hard Red Spring',  unit: 'bu' },
   { id: 'wheat-srw',  name: 'Soft Red Winter',  unit: 'bu' },

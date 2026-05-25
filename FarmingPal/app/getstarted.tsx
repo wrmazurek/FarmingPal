@@ -1,7 +1,6 @@
 import { useRouter } from 'expo-router';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-
-const LOGO = require('@/assets/images/IMG_4064 - Trasluscent Background.png');
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import AppHeader from '@/components/AppHeader';
 
 const STEPS = [
   {
@@ -41,13 +40,11 @@ export default function GetStartedScreen() {
 
   return (
     <View style={styles.container}>
+      <AppHeader />
       <ScrollView contentContainerStyle={styles.content}>
 
-        {/* Header */}
+        {/* Hero */}
         <View style={styles.hero}>
-          <TouchableOpacity onPress={() => router.replace('/(tabs)')} activeOpacity={0.75} style={styles.logoBtn}>
-            <Image source={LOGO} style={styles.logo} resizeMode="contain" />
-          </TouchableOpacity>
           <Text style={styles.heroTitle}>How FarmingPal Works</Text>
           <Text style={styles.heroSub}>
             Built by farmers, for farmers. Here's everything you can do with FarmingPal — for free.
@@ -97,11 +94,9 @@ const styles = StyleSheet.create({
   container:      { flex: 1, backgroundColor: '#f4f8f4' },
   content:        { paddingBottom: 48 },
 
-  hero:           { backgroundColor: '#2d6a2d', paddingTop: 0, paddingBottom: 32, paddingLeft: 12, paddingRight: 24 },
-  logoBtn:        { marginTop: 12, marginBottom: 16 },
-  logo:           { height: 100, width: 130 },
-  heroTitle:      { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10, marginLeft: 12 },
-  heroSub:        { fontSize: 14, color: '#c8e6c8', lineHeight: 22, marginLeft: 12 },
+  hero:           { backgroundColor: '#2d6a2d', paddingTop: 24, paddingBottom: 32, paddingLeft: 24, paddingRight: 24 },
+  heroTitle:      { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
+  heroSub:        { fontSize: 14, color: '#c8e6c8', lineHeight: 22 },
 
   stepCard:       { flexDirection: 'row', backgroundColor: '#fff', marginLeft: 12, marginRight: 16, marginTop: 12, borderRadius: 14, padding: 16, shadowColor: '#000', shadowOpacity: 0.05, shadowRadius: 4, elevation: 1 },
   stepBadge:      { width: 32, height: 32, borderRadius: 16, backgroundColor: '#2d6a2d', alignItems: 'center', justifyContent: 'center', marginRight: 14, marginTop: 2, flexShrink: 0 },

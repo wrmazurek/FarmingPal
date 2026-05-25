@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
-  Alert, KeyboardAvoidingView, Platform, ScrollView,
+  KeyboardAvoidingView, Platform, ScrollView,
   StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
 import { useUser } from '@/context/UserContext';
@@ -16,10 +16,12 @@ export default function FarmProfileScreen() {
   const [postalCode, setPostalCode]   = useState('');
   const [acres, setAcres]             = useState('');
   const [loading, setLoading]         = useState(false);
+  const [formError, setFormError]     = useState('');
 
   const handleSave = async () => {
+    setFormError('');
     if (!farmName || !city || !postalCode) {
-      Alert.alert('Required fields', 'Please fill in Farm Name, City/Town, and Postal Code.');
+      setFormError('Please fill in Farm Name, City/Town, and Postal Code.');
       return;
     }
     setLoading(true);
@@ -27,7 +29,7 @@ export default function FarmProfileScreen() {
       await saveFarmDetails({ farmName, ruralAddress, city, postalCode, acres });
       router.replace('/(tabs)/search');
     } catch {
-      Alert.alert('Error', 'Could not save your profile. Please try again.');
+      setFormError('Could not save your profile. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -86,6 +88,12 @@ export default function FarmProfileScreen() {
           keyboardType="number-pad"
         />
 
+        {formError ? (
+          <View style={styles.errorBox}>
+            <Text style={styles.errorText}>{formError}</Text>
+          </View>
+        ) : null}
+
         <TouchableOpacity
           style={[styles.button, loading && styles.buttonDisabled]}
           onPress={handleSave}
@@ -122,4 +130,7 @@ const styles = StyleSheet.create({
 
   skipBtn:        { alignItems: 'center', paddingVertical: 8 },
   skipText:       { color: '#999', fontSize: 14 },
+
+  errorBox:       { backgroundColor: '#fff2f2', borderRadius: 10, borderWidth: 1.5, borderColor: '#f5c2c2', padding: 14, marginBottom: 8, marginTop: 4 },
+  errorText:      { fontSize: 14, color: '#c0392b', fontWeight: '600', lineHeight: 20 },
 });

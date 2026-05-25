@@ -1,11 +1,11 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
-  Alert, Image, KeyboardAvoidingView, Platform, ScrollView,
+  Image, KeyboardAvoidingView, Platform, ScrollView,
   StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
 
-const LOGO = require('@/assets/images/IMG_4064 - Trasluscent Background.png');
+const LOGO = require('@/assets/images/FP Logo - Trasluscent Background.png');
 import { useAuth } from '@/context/AuthContext';
 
 export default function LoginScreen() {
@@ -15,17 +15,25 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const [loginError, setLoginError] = useState('');
+
   const handleLogin = async () => {
-    if (!email || !password) {
-      Alert.alert('Missing fields', 'Please enter your email and password.');
-      return;
-    }
+    if (!email || !password) { setLoginError('Please enter your email and password.'); return; }
+    setLoginError('');
     setLoading(true);
     try {
-      await signIn(email, password);
+      const timeout = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error('Sign in timed out — please try again.')), 15_000)
+      );
+      await Promise.race([signIn(email, password), timeout]);
       router.replace('/(tabs)/search');
-    } catch {
-      Alert.alert('Sign in failed', 'Check your credentials and try again.');
+    } catch (err: any) {
+      const msg = err?.message ?? '';
+      if (msg.toLowerCase().includes('email not confirmed')) {
+        setLoginError('Email not confirmed — check your inbox for the confirmation link.');
+      } else {
+        setLoginError(msg || 'Sign in failed. Check your credentials and try again.');
+      }
     } finally {
       setLoading(false);
     }
@@ -45,6 +53,11 @@ export default function LoginScreen() {
         <Text style={styles.subtitle}>Access pricing data across North America</Text>
 
         <View style={styles.signInSection}>
+          {loginError ? (
+            <View style={styles.errorBox}>
+              <Text style={styles.errorText}>{loginError}</Text>
+            </View>
+          ) : null}
           <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.input}
@@ -70,6 +83,10 @@ export default function LoginScreen() {
             disabled={loading}
           >
             <Text style={styles.buttonText}>{loading ? 'Signing in...' : 'Sign In'}</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => router.push('/(auth)/forgot-password' as any)} style={styles.forgotRow}>
+            <Text style={styles.forgotText}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
 
@@ -132,4 +149,8 @@ const styles = StyleSheet.create({
   registerBtn:      { backgroundColor: '#2d6a2d', borderRadius: 12, padding: 16, alignItems: 'center', marginBottom: 12 },
   registerBtnText:  { color: '#fff', fontSize: 15, fontWeight: '700' },
   howItWorksLink:   { color: '#2d6a2d', fontSize: 13, textAlign: 'center', fontWeight: '600' },
+  forgotRow:        { marginTop: 14, alignItems: 'center' },
+  forgotText:       { color: '#2d6a2d', fontSize: 13, fontWeight: '600' },
+  errorBox:         { backgroundColor: '#fff2f2', borderRadius: 10, borderWidth: 1.5, borderColor: '#f5c2c2', padding: 14, marginBottom: 16 },
+  errorText:        { fontSize: 14, color: '#c0392b', fontWeight: '600', lineHeight: 20 },
 });

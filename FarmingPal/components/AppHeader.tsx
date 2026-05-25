@@ -1,16 +1,21 @@
 import { usePathname, useRouter } from 'expo-router';
-import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAuth } from '@/context/AuthContext';
+import { useUser } from '@/context/UserContext';
+import { useJobBoard } from '@/context/JobBoardContext';
 
-const LOGO = require('@/assets/images/IMG_4064 - Trasluscent Background.png');
+const LOGO = require('@/assets/images/FP Logo - Trasluscent Background.png');
 
-const GUEST_NAV_ITEMS = [
-  { label: 'Report Pricing',  icon: '🌾', href: '/(tabs)/pricing',  wrap: true },
-  { label: 'Search Prices',   icon: '🔍', href: '/(tabs)/search',   wrap: true },
-  { label: 'Custom Services', icon: '🚜', href: '/(tabs)/services', wrap: true },
+const NAV_ITEMS = [
+  { label: 'Prices',      icon: 'cash-multiple', href: '/(tabs)/pricing'      },
+  { label: 'Marketplace', icon: 'store',         href: '/(tabs)/marketplace'  },
 ];
 
-const AUTH_NAV_ITEMS: { label: string; icon: string; href: string; wrap: boolean }[] = [];
+const MARKETPLACE_PATHS = [
+  '/marketplace', '/services', '/service-booking', '/service-register',
+  '/buysell', '/buysell-post', '/job-board', '/job-detail', '/job-thread', '/my-jobs', '/job-applicants',
+];
 
 interface Props {
   children?: React.ReactNode;
@@ -20,18 +25,23 @@ export default function AppHeader({ children }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const { isAuthenticated, signOut } = useAuth();
+  const { profile } = useUser();
+  const { getUnreadCount } = useJobBoard();
+  const unread = isAuthenticated ? getUnreadCount(profile?.id ?? '') : 0;
 
-  const isActive = (href: string) =>
-    pathname.includes(href.replace('/(tabs)/', '/'));
-
-  const handleSignOut = () => {
-    Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
-      { text: 'Cancel', style: 'cancel' },
-      { text: 'Sign Out', style: 'destructive', onPress: signOut },
-    ]);
+  const isActive = (href: string) => {
+    if (href === '/(tabs)/marketplace') {
+      return MARKETPLACE_PATHS.some(p => pathname.includes(p));
+    }
+    return pathname.includes(href.replace('/(tabs)/', '/'));
   };
 
-  const navItems = isAuthenticated ? AUTH_NAV_ITEMS : GUEST_NAV_ITEMS;
+  const handleSignOut = () => {
+    // Navigate immediately — don't await the server-side signout network call.
+    // signOut() clears the local session; server token invalidation runs in background.
+    signOut().catch(() => {});
+    router.replace('/(auth)/login');
+  };
 
   return (
     <View style={styles.header}>
@@ -42,7 +52,7 @@ export default function AppHeader({ children }: Props) {
         </TouchableOpacity>
 
         {/* Nav items */}
-        {navItems.map((item) => {
+        {NAV_ITEMS.map((item) => {
           const active = isActive(item.href);
           return (
             <TouchableOpacity
@@ -51,7 +61,11 @@ export default function AppHeader({ children }: Props) {
               onPress={() => router.push(item.href as any)}
               activeOpacity={0.75}
             >
-              <Text style={styles.navIcon}>{item.icon}</Text>
+              <MaterialCommunityIcons
+                name={item.icon as any}
+                size={26}
+                color={active ? '#fff' : 'rgba(255,255,255,0.75)'}
+              />
               <Text style={[styles.navLabel, active && styles.navLabelActive]} numberOfLines={item.wrap ? undefined : 1}>
                 {item.label}
               </Text>
@@ -60,22 +74,38 @@ export default function AppHeader({ children }: Props) {
         })}
 
         {/* Authenticated-only: Profile + Sign Out */}
-        {isAuthenticated && (
+        {isAuthenticated ? (
           <>
             <TouchableOpacity
               style={[styles.navItem, isActive('/(tabs)/profile') && styles.navItemActive]}
               onPress={() => router.push('/(tabs)/profile' as any)}
               activeOpacity={0.75}
             >
-              <Text style={styles.navIcon}>👤</Text>
+              <View style={styles.profileIconOuter}>
+                <MaterialCommunityIcons
+                  name="account-cowboy-hat"
+                  size={26}
+                  color={isActive('/(tabs)/profile') ? '#fff' : 'rgba(255,255,255,0.75)'}
+                />
+                {unread > 0 && (
+                  <View style={styles.badge}>
+                    <Text style={styles.badgeText}>{unread > 99 ? '99+' : unread}</Text>
+                  </View>
+                )}
+              </View>
               <Text style={[styles.navLabel, isActive('/(tabs)/profile') && styles.navLabelActive]}>Profile</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.signOutBtn} onPress={handleSignOut} activeOpacity={0.75}>
-              <Text style={styles.navIcon}>🚪</Text>
+              <MaterialCommunityIcons name="logout" size={22} color="rgba(255,255,255,0.75)" />
               <Text style={styles.signOutLabel}>Sign Out</Text>
             </TouchableOpacity>
           </>
+        ) : (
+          <TouchableOpacity style={styles.signInBtn} onPress={() => router.push('/(auth)/login' as any)} activeOpacity={0.75}>
+            <MaterialCommunityIcons name="login" size={22} color="rgba(255,255,255,0.75)" />
+            <Text style={styles.signInLabel}>Sign In</Text>
+          </TouchableOpacity>
         )}
       </View>
 
@@ -93,10 +123,14 @@ const styles = StyleSheet.create({
 
   navItem:       { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingVertical: 2, paddingHorizontal: 2, borderRadius: 8 },
   navItemActive: { backgroundColor: 'rgba(255,255,255,0.18)' },
-  navIcon:       { fontSize: 36 },
+  profileIconOuter: { position: 'relative' },
+  badge:            { position: 'absolute', top: -4, right: -4, minWidth: 18, height: 18, borderRadius: 9, backgroundColor: '#ef4444', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 3, borderWidth: 1.5, borderColor: '#2d6a2d' },
+  badgeText:        { fontSize: 10, fontWeight: '800', color: '#fff' },
   navLabel:      { fontSize: 16, color: 'rgba(255,255,255,0.75)', fontWeight: '600', flexShrink: 1 },
   navLabelActive:{ color: '#fff', fontWeight: '700' },
 
-  signOutBtn:    { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingVertical: 2, paddingHorizontal: 6, borderRadius: 8, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.35)', marginLeft: 4 },
+  signOutBtn:    { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingVertical: 2, paddingHorizontal: 6, borderRadius: 8, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.35)', marginLeft: 4, marginRight: 24 },
   signOutLabel:  { fontSize: 16, color: 'rgba(255,255,255,0.75)', fontWeight: '600' },
+  signInBtn:     { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 4, paddingVertical: 2, paddingHorizontal: 6, borderRadius: 8, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.35)', marginLeft: 4, marginRight: 24 },
+  signInLabel:   { fontSize: 16, color: 'rgba(255,255,255,0.75)', fontWeight: '600' },
 });

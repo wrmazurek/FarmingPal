@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\wrmaz\\\\OneDrive\\\\Wendel\\\\Wendel 2022.6\\\\Business\\\\FarmingPal.com\\\\App Dev\\\\Claude App Dev\\\\FarmingPal\\\\types\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\wrmaz\\\\OneDrive\\\\Wendel\\\\Wendel 2022.6\\\\Business\\\\FarmingPal.com\\\\App Dev\\\\Claude App Dev\\\\FarmingPal\\\\context\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\wrmaz\\\\OneDrive\\\\Wendel\\\\Wendel 2022.6\\\\Business\\\\FarmingPal.com\\\\App Dev\\\\Claude App Dev\\\\FarmingPal\\\\data\")",
+      "Bash(npx expo *)",
+      "PowerShell(New-NetFirewallRule -DisplayName \"Expo Dev Server\" -Direction Inbound -Protocol TCP -LocalPort 8081 -Action Allow)"
+    ]
+  }
+}

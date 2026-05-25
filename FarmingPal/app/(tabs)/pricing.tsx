@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useUser } from '@/context/UserContext';
 import { REGIONS } from '@/constants/regions';
 import { Country } from '@/types';
@@ -8,10 +9,10 @@ import AppHeader from '@/components/AppHeader';
 import RegionPickerModal from '@/components/RegionPickerModal';
 
 const CATEGORIES = [
-  { label: 'Crop',       icon: '🌾', href: '/(tabs)/search',      subtitle: 'Corn, Wheat, Canola & more' },
-  { label: 'Fuel',       icon: '⛽', href: '/(tabs)/submit-fuel',  subtitle: 'Diesel, Gasoline, Propane' },
-  { label: 'Fertilizer', icon: '🧪', href: '/(tabs)/submit-fert',  subtitle: 'Urea, Potash, DAP & blends' },
-  { label: 'Chemical',   icon: '🛡️', href: '/(tabs)/submit-chem',  subtitle: 'Herbicides, Fungicides & more' },
+  { label: 'Crop',       icon: 'barley',       href: '/(tabs)/submit',      subtitle: 'Cash Price (Bid/Spot)\nCorn, Wheat, Canola & more' },
+  { label: 'Fuel',       icon: 'gas-station',  href: '/(tabs)/submit-fuel',  subtitle: 'Diesel, Gasoline, Propane' },
+  { label: 'Fertilizer', icon: 'sprout',       href: '/(tabs)/submit-fert',  subtitle: 'Urea, Potash, DAP & blends' },
+  { label: 'Chemical',   icon: 'spray-bottle', image: require('@/assets/images/Spayer-Greenv2.png'), href: '/(tabs)/submit-chem',  subtitle: 'Herbicides, Fungicides & more' },
 ];
 
 export default function PricingScreen() {
@@ -74,7 +75,12 @@ export default function PricingScreen() {
                 onPress={() => router.push(cat.href as any)}
                 activeOpacity={0.8}
               >
-                <Text style={styles.cardIcon}>{cat.icon}</Text>
+                <View style={styles.cardIconWrap}>
+                  {'image' in cat
+                    ? <Image source={(cat as any).image} style={{ width: 63, height: 63 }} resizeMode="contain" />
+                    : <MaterialCommunityIcons name={cat.icon as any} size={42} color="#2d6a2d" />
+                  }
+                </View>
                 <Text style={styles.cardLabel}>{cat.label}</Text>
                 <Text style={styles.cardSub}>{cat.subtitle}</Text>
               </TouchableOpacity>
@@ -107,7 +113,8 @@ const styles = StyleSheet.create({
   sub:                 { fontSize: 14, color: '#777', marginBottom: 20 },
   grid:                { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   card:                { backgroundColor: '#fff', borderRadius: 14, padding: 18, width: '47%', alignItems: 'center', shadowColor: '#000', shadowOpacity: 0.06, shadowRadius: 6, elevation: 2 },
-  cardIcon:            { fontSize: 40, marginBottom: 10 },
+  cardIconWrap:        { width: 63, height: 63, alignItems: 'center', justifyContent: 'center', marginBottom: 10 },
+  cardIcon:            { marginBottom: 10 },
   cardLabel:           { fontSize: 17, fontWeight: '700', color: '#1a3c1a', marginBottom: 4, textAlign: 'center' },
   cardSub:             { fontSize: 12, color: '#888', textAlign: 'center', lineHeight: 17 },
 });

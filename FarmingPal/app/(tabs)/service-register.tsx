@@ -1,12 +1,15 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
-  Alert, KeyboardAvoidingView, Platform, ScrollView,
+  Image, KeyboardAvoidingView, Platform, ScrollView,
   StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useAuth } from '@/context/AuthContext';
 import { useUser } from '@/context/UserContext';
 import AppHeader from '@/components/AppHeader';
+import SuccessToast from '@/components/SuccessToast';
 import CalendarPicker from '@/components/CalendarPicker';
 import { SERVICE_TYPES } from '@/constants/services';
 import { REGIONS } from '@/constants/regions';
@@ -48,7 +51,7 @@ export default function ServiceRegisterScreen() {
 
   const router = useRouter();
   const { isAuthenticated } = useAuth();
-  const { profile, addOperatorEquipment, updateOperatorEquipment } = useUser();
+  const { profile, addOperatorEquipment, updateOperatorEquipment, setPendingProfileTab } = useUser();
 
   const regionName = REGIONS.find(r => r.code === profile?.regionCode)?.name ?? '';
   const existing = isEditing
@@ -67,13 +70,18 @@ export default function ServiceRegisterScreen() {
   const [endOpen,         setEndOpen]         = useState(false);
   const [notes,           setNotes]           = useState(existing?.notes ?? '');
   const [saving,          setSaving]          = useState(false);
+  const [toastVisible,    setToastVisible]    = useState(false);
+  const [savedOk,         setSavedOk]         = useState(false);
+  const [savedEquipCount, setSavedEquipCount] = useState(0);
+  const [formError,       setFormError]       = useState('');
 
   const updateField = (field: keyof EquipmentDetail, value: string) =>
     setEquipment(prev => ({ ...prev, [field]: value }));
 
   const handleSave = async () => {
+    setFormError('');
     if (!businessName || !selectedService || !ratePerAcre) {
-      Alert.alert('Missing fields', 'Enter a business name, select a service, and set a rate.');
+      setFormError('Enter a business name, select a service, and set a rate.');
       return;
     }
     setSaving(true);
@@ -90,21 +98,22 @@ export default function ServiceRegisterScreen() {
 
       if (isEditing) {
         await updateOperatorEquipment(editId!, record);
-        Alert.alert('Listing Updated', 'Your listing has been updated.', [
-          { text: 'View Profile', onPress: () => router.replace('/(tabs)/profile' as any) },
-        ]);
+        setPendingProfileTab('equipment');
+        await AsyncStorage.setItem('@farmingpal:pendingTab', 'equipment');
+        setToastVisible(true);
+        setTimeout(() => router.replace('/(tabs)/profile' as any), 1200);
       } else {
         await addOperatorEquipment(record);
+        setPendingProfileTab('equipment');
+        await AsyncStorage.setItem('@farmingpal:pendingTab', 'equipment');
         setSelectedService('');
         setEquipment(EMPTY_DETAIL);
         setNotes('');
-        Alert.alert('Listing Added', 'Your listing has been added to your profile.', [
-          { text: 'View Profile', onPress: () => router.push('/(tabs)/profile' as any) },
-          { text: 'Add Another' },
-        ]);
+        setSavedEquipCount((profile?.operatorEquipment?.length ?? 0) + 1);
+        setSavedOk(true);
       }
     } catch {
-      Alert.alert('Error', 'Could not save your listing. Please try again.');
+      setFormError('Could not save your listing. Please try again.');
     } finally {
       setSaving(false);
     }
@@ -115,7 +124,23 @@ export default function ServiceRegisterScreen() {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <AppHeader />
-      {!isAuthenticated ? <AuthGate /> : (
+      {!isAuthenticated ? <AuthGate /> : savedOk ? (
+        <ScrollView style={styles.container} contentContainerStyle={styles.savedContent}>
+          <View style={styles.savedBox}>
+            <MaterialCommunityIcons name="check-circle" size={52} color="#2d6a2d" />
+            <Text style={styles.savedTitle}>Listing Added!</Text>
+            <Text style={styles.savedSub}>
+              Your listing has been added to your profile. You now have {savedEquipCount} equipment listing(s).
+            </Text>
+            <TouchableOpacity style={styles.viewProfileBtn} onPress={() => router.push('/(tabs)/profile' as any)}>
+              <Text style={styles.viewProfileBtnText}>View Profile</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.addAnotherBtn} onPress={() => setSavedOk(false)}>
+              <Text style={styles.addAnotherBtnText}>Add Another Listing</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      ) : (
         <ScrollView style={styles.container} contentContainerStyle={styles.content}>
 
           <Text style={styles.pageTitle}>{isEditing ? 'Edit Listing' : 'Register as Operator'}</Text>
@@ -149,7 +174,7 @@ export default function ServiceRegisterScreen() {
                       if (!active) setEquipment(EMPTY_DETAIL);
                     }}
                   >
-                    <Text style={styles.chipIcon}>{s.icon}</Text>
+                    <Image source={s.icon} style={styles.chipIcon} resizeMode="contain" />
                     <Text style={[styles.chipText, active && styles.chipTextActive]}>{s.label}</Text>
                   </TouchableOpacity>
                 );
@@ -161,7 +186,10 @@ export default function ServiceRegisterScreen() {
           {selectedService !== '' && (
             <View style={styles.section}>
               <Text style={styles.sectionTitle}>Equipment Details</Text>
-              <Text style={styles.equipHeading}>{svcType?.icon}  {selectedService}</Text>
+              <View style={styles.equipHeadingRow}>
+                {svcType && <Image source={svcType.icon} style={styles.equipHeadingIcon} resizeMode="contain" />}
+                <Text style={styles.equipHeading}>{selectedService}</Text>
+              </View>
 
               {/* Year + Make */}
               <View style={styles.row}>
@@ -262,6 +290,12 @@ export default function ServiceRegisterScreen() {
               placeholderTextColor="#bbb" multiline textAlignVertical="top" />
           </View>
 
+          {formError ? (
+            <View style={styles.errorBox}>
+              <Text style={styles.errorText}>{formError}</Text>
+            </View>
+          ) : null}
+
           <TouchableOpacity
             style={[styles.submitBtn, saving && styles.submitBtnDisabled]}
             onPress={handleSave} disabled={saving}
@@ -273,6 +307,7 @@ export default function ServiceRegisterScreen() {
 
         </ScrollView>
       )}
+      <SuccessToast visible={toastVisible} message="Listing updated!" onHide={() => setToastVisible(false)} />
     </KeyboardAvoidingView>
   );
 }
@@ -301,11 +336,13 @@ const styles = StyleSheet.create({
   chipGrid:         { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
   chip:             { flexDirection: 'row', alignItems: 'center', gap: 6, paddingVertical: 8, paddingHorizontal: 14, borderRadius: 20, borderWidth: 1.5, borderColor: '#d0e8d0', backgroundColor: '#f6fbf6' },
   chipActive:       { backgroundColor: '#2d6a2d', borderColor: '#2d6a2d' },
-  chipIcon:         { fontSize: 16 },
+  chipIcon:         { width: 28, height: 28 },
   chipText:         { fontSize: 13, fontWeight: '600', color: '#2d6a2d' },
   chipTextActive:   { color: '#fff' },
 
-  equipHeading:     { fontSize: 15, fontWeight: '700', color: '#1a3c1a', marginBottom: 16 },
+  equipHeadingRow:  { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 16 },
+  equipHeadingIcon: { width: 28, height: 28 },
+  equipHeading:     { fontSize: 15, fontWeight: '700', color: '#1a3c1a' },
 
   row:              { flexDirection: 'row', gap: 12 },
   yearField:        { width: 80 },
@@ -323,4 +360,16 @@ const styles = StyleSheet.create({
   submitBtn:        { backgroundColor: '#2d6a2d', borderRadius: 12, padding: 18, alignItems: 'center', marginTop: 8 },
   submitBtnDisabled:{ opacity: 0.6 },
   submitBtnText:    { color: '#fff', fontSize: 17, fontWeight: '700' },
+
+  errorBox:         { backgroundColor: '#fff2f2', borderRadius: 10, borderWidth: 1.5, borderColor: '#f5c2c2', padding: 14, marginBottom: 8 },
+  errorText:        { fontSize: 14, color: '#c0392b', fontWeight: '600', lineHeight: 20 },
+
+  savedContent:     { flexGrow: 1, justifyContent: 'center', padding: 24 },
+  savedBox:         { backgroundColor: '#fff', borderRadius: 20, padding: 28, alignItems: 'center', borderWidth: 1.5, borderColor: '#d0e8d0' },
+  savedTitle:       { fontSize: 22, fontWeight: '900', color: '#1a3c1a', marginTop: 14, marginBottom: 8 },
+  savedSub:         { fontSize: 14, color: '#555', textAlign: 'center', lineHeight: 21, marginBottom: 28 },
+  viewProfileBtn:   { backgroundColor: '#2d6a2d', borderRadius: 12, paddingVertical: 16, paddingHorizontal: 32, width: '100%', alignItems: 'center', marginBottom: 12 },
+  viewProfileBtnText:{ color: '#fff', fontSize: 16, fontWeight: '700' },
+  addAnotherBtn:    { borderRadius: 12, paddingVertical: 14, paddingHorizontal: 32, width: '100%', alignItems: 'center', borderWidth: 1.5, borderColor: '#d0e8d0' },
+  addAnotherBtnText:{ color: '#2d6a2d', fontSize: 15, fontWeight: '700' },
 });
