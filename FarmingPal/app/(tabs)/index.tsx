@@ -41,7 +41,7 @@ export default function HomeScreen() {
           <Text style={styles.ctaSub}>
             Seen a price at your elevator, fuel pump, or co-op? Submit it anonymously in seconds — no account required. Help your community make smarter decisions.
           </Text>
-          <TouchableOpacity style={styles.ctaBtn} onPress={() => router.push('/(tabs)/submit' as any)}>
+          <TouchableOpacity style={styles.ctaBtn} onPress={() => router.push('/(tabs)/pricing' as any)}>
             <Text style={styles.ctaBtnText}>Report a Price →</Text>
           </TouchableOpacity>
         </View>
