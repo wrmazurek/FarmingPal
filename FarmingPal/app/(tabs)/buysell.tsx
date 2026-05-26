@@ -221,7 +221,7 @@ export default function BuySellScreen() {
 
       {/* Hero */}
       <View style={styles.hero}>
-        <Text style={styles.heroTitle}>Buy / Sell — Equipment &amp; Land</Text>
+        <Text style={styles.heroTitle}>Buy / Sell — Equipment & Land</Text>
         <Text style={styles.heroSub}>List or find farming equipment, cropland, pasture, and mixed farm properties.</Text>
       </View>
 
