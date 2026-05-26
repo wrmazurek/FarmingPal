@@ -219,6 +219,12 @@ export default function BuySellScreen() {
     <View style={styles.container}>
       <AppHeader />
 
+      {/* Hero */}
+      <View style={styles.hero}>
+        <Text style={styles.heroTitle}>Buy / Sell — Equipment &amp; Land</Text>
+        <Text style={styles.heroSub}>List or find farming equipment, cropland, pasture, and mixed farm properties.</Text>
+      </View>
+
       {/* Type toggle + filter bar */}
       <View style={styles.filterBar}>
         {/* Equipment / Land toggle */}
@@ -400,6 +406,9 @@ export default function BuySellScreen() {
 
 const styles = StyleSheet.create({
   container:            { flex: 1, backgroundColor: '#f4f8f4' },
+  hero:                 { backgroundColor: '#2d6a2d', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
+  heroTitle:            { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
+  heroSub:              { fontSize: 14, color: '#c8e6c8', textAlign: 'center', lineHeight: 22 },
 
   // Filter bar
   filterBar:            { flexDirection: 'row', alignItems: 'flex-start', gap: 8, backgroundColor: '#fff', paddingVertical: 10, paddingHorizontal: 12, borderBottomWidth: 1, borderBottomColor: '#e8f0e8', zIndex: 10 },

@@ -92,8 +92,8 @@ export default function FarmhandsScreen() {
 
         {/* Hero */}
         <View style={styles.hero}>
-          <Text style={styles.heroTitle}>Farmhands</Text>
-          <Text style={styles.heroSub}>Farm employment postings across Canada and the USA</Text>
+          <Text style={styles.heroTitle}>Farmhands — Employment Postings</Text>
+          <Text style={styles.heroSub}>Post or find seasonal and full-time farm employment across your region.</Text>
           {isAuthenticated && (
             <TouchableOpacity style={styles.postBtn} onPress={() => router.push('/(tabs)/farmhand-post' as any)}>
               <Text style={styles.postBtnText}>+ Post a Job</Text>
@@ -228,9 +228,9 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f4f8f4' },
   content:   { paddingBottom: 48 },
 
-  hero:       { backgroundColor: '#7a5230', paddingTop: 24, paddingBottom: 24, paddingHorizontal: 20, alignItems: 'center' },
-  heroTitle:  { fontSize: 26, fontWeight: '900', color: '#fff', marginBottom: 6 },
-  heroSub:    { fontSize: 13, color: 'rgba(255,255,255,0.75)', textAlign: 'center', marginBottom: 14 },
+  hero:       { backgroundColor: '#2d6a2d', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
+  heroTitle:  { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
+  heroSub:    { fontSize: 14, color: '#c8e6c8', textAlign: 'center', lineHeight: 22, marginBottom: 14 },
   postBtn:    { backgroundColor: '#fff', borderRadius: 10, paddingVertical: 10, paddingHorizontal: 24 },
   postBtnText:{ color: '#7a5230', fontWeight: '800', fontSize: 14 },
 
