@@ -406,9 +406,9 @@ export default function BuySellScreen() {
 
 const styles = StyleSheet.create({
   container:            { flex: 1, backgroundColor: '#f4f8f4' },
-  hero:                 { backgroundColor: '#2d6a2d', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
+  hero:                 { backgroundColor: '#c8931a', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
   heroTitle:            { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
-  heroSub:              { fontSize: 14, color: '#c8e6c8', textAlign: 'center', lineHeight: 22 },
+  heroSub:              { fontSize: 14, color: '#fde8b0', textAlign: 'center', lineHeight: 22 },
 
   // Filter bar
   filterBar:            { flexDirection: 'row', alignItems: 'flex-start', gap: 8, backgroundColor: '#fff', paddingVertical: 10, paddingHorizontal: 12, borderBottomWidth: 1, borderBottomColor: '#e8f0e8', zIndex: 10 },

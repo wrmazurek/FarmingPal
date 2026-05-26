@@ -228,9 +228,9 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f4f8f4' },
   content:   { paddingBottom: 48 },
 
-  hero:       { backgroundColor: '#2d6a2d', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
+  hero:       { backgroundColor: '#7a5230', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
   heroTitle:  { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
-  heroSub:    { fontSize: 14, color: '#c8e6c8', textAlign: 'center', lineHeight: 22, marginBottom: 14 },
+  heroSub:    { fontSize: 14, color: '#e8c9a8', textAlign: 'center', lineHeight: 22, marginBottom: 14 },
   postBtn:    { backgroundColor: '#fff', borderRadius: 10, paddingVertical: 10, paddingHorizontal: 24 },
   postBtnText:{ color: '#7a5230', fontWeight: '800', fontSize: 14 },
 
