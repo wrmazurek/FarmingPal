@@ -37,12 +37,12 @@ export default function HomeScreen() {
 
         {/* CTA */}
         <View style={styles.ctaCard}>
-          <Text style={styles.ctaTitle}>Report Current Pricing</Text>
+          <Text style={styles.ctaTitle}>Built for Farmers, by Farmers</Text>
           <Text style={styles.ctaSub}>
-            Seen a price at your elevator, fuel pump, or co-op? Submit it anonymously in seconds — no account required. Help your community make smarter decisions.
+            Crowdsourced pricing, custom farming jobs, equipment listings, land sales, and farm employment — all in one free platform.
           </Text>
-          <TouchableOpacity style={styles.ctaBtn} onPress={() => router.push('/(tabs)/pricing' as any)}>
-            <Text style={styles.ctaBtnText}>Report a Price →</Text>
+          <TouchableOpacity style={styles.ctaBtn} onPress={() => router.push('/(tabs)/marketplace' as any)}>
+            <Text style={styles.ctaBtnText}>Explore the Platform →</Text>
           </TouchableOpacity>
         </View>
 

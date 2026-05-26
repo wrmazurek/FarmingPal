@@ -7,7 +7,12 @@ import { useJobBoard } from '@/context/JobBoardContext';
 
 const LOGO = require('@/assets/images/FP Logo - Trasluscent Background.png');
 
-const NAV_ITEMS = [
+const NAV_ITEMS_GUEST = [
+  { label: 'Report Prices', icon: 'cash-multiple', href: '/(tabs)/pricing'      },
+  { label: 'Marketplace',   icon: 'store',         href: '/(tabs)/marketplace'  },
+];
+
+const NAV_ITEMS_AUTH = [
   { label: 'Prices',      icon: 'cash-multiple', href: '/(tabs)/pricing'      },
   { label: 'Marketplace', icon: 'store',         href: '/(tabs)/marketplace'  },
 ];
@@ -28,6 +33,7 @@ export default function AppHeader({ children }: Props) {
   const { profile } = useUser();
   const { getUnreadCount } = useJobBoard();
   const unread = isAuthenticated ? getUnreadCount(profile?.id ?? '') : 0;
+  const NAV_ITEMS = isAuthenticated ? NAV_ITEMS_AUTH : NAV_ITEMS_GUEST;
 
   const isActive = (href: string) => {
     if (href === '/(tabs)/marketplace') {
