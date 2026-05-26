@@ -573,7 +573,7 @@ body {
 /* ── Contact Page ── */
 .nav-active { color: var(--green) !important; font-weight: 700; }
 
-.contact-hero { background: #111; color: #fff; padding: 25px 24px; text-align: center; }
+.contact-hero { background: #111; color: #fff; padding: 12.5px 24px; text-align: center; }
 .contact-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin-bottom: 12px; }
 .contact-subtitle { font-size: 18px; color: rgba(255,255,255,.75); max-width: 540px; margin: 0 auto; }
 
