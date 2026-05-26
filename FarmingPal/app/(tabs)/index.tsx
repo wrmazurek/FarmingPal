@@ -9,7 +9,7 @@ const MARKETPLACE_FEATURES = [
     label: 'Custom Farming Job Board',
     desc: 'Post jobs or find operators for seeding, spraying, harvesting, and more.',
     href: '/(tabs)/job-board',
-    color: '#2d6a2d',
+    color: '#6B7A2A',
   },
   {
     icon: 'store-outline',

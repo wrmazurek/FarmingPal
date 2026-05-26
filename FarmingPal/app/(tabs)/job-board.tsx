@@ -133,6 +133,12 @@ export default function JobBoardScreen() {
     <View style={styles.container}>
       <AppHeader />
 
+      {/* Hero */}
+      <View style={styles.hero}>
+        <Text style={styles.heroTitle}>Custom Farming Job Board</Text>
+        <Text style={styles.heroSub}>Post jobs or find operators for seeding, spraying, harvesting, and more.</Text>
+      </View>
+
       {/* ── Location filter bar ──────────────────────────────────────────────── */}
       <View style={styles.filterWrap}>
 
@@ -311,6 +317,9 @@ export default function JobBoardScreen() {
 
 const styles = StyleSheet.create({
   container:            { flex: 1, backgroundColor: '#f4f8f4' },
+  hero:                 { backgroundColor: '#6B7A2A', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
+  heroTitle:            { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
+  heroSub:              { fontSize: 14, color: '#d8e4a0', textAlign: 'center', lineHeight: 22 },
   content:              { paddingBottom: 48 },
 
   // Auth gate

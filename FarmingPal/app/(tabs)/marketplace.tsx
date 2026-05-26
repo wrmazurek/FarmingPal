@@ -11,7 +11,7 @@ const SECTIONS = [
     cta: 'View Job Board',
     href: '/(tabs)/job-board',
     params: undefined as undefined,
-    color: '#2d6a2d',
+    color: '#6B7A2A',
   },
   {
     icon: 'store-outline',
