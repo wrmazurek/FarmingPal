@@ -9,10 +9,10 @@ import AppHeader from '@/components/AppHeader';
 import RegionPickerModal from '@/components/RegionPickerModal';
 
 const CATEGORIES = [
-  { label: 'Crop',       icon: 'barley',       href: '/(tabs)/submit',      subtitle: 'Cash Price (Bid/Spot)\nCorn, Wheat, Canola & more' },
-  { label: 'Fuel',       icon: 'gas-station',  href: '/(tabs)/submit-fuel',  subtitle: 'Diesel, Gasoline, Propane' },
-  { label: 'Fertilizer', icon: 'sprout',       href: '/(tabs)/submit-fert',  subtitle: 'Urea, Potash, DAP & blends' },
-  { label: 'Chemical',   icon: 'spray-bottle', image: require('@/assets/images/Spayer-Greenv2.png'), href: '/(tabs)/submit-chem',  subtitle: 'Herbicides, Fungicides & more' },
+  { label: 'Crop',       color: '#2d6a2d', icon: 'barley',       href: '/(tabs)/submit',       subtitle: 'Cash Price (Bid/Spot)\nCorn, Wheat, Canola & more' },
+  { label: 'Fuel',       color: '#c8931a', icon: 'gas-station',  href: '/(tabs)/submit-fuel',  subtitle: 'Diesel, Gasoline, Propane' },
+  { label: 'Fertilizer', color: '#7a5230', icon: 'sprout',       href: '/(tabs)/submit-fert',  subtitle: 'Urea, Potash, DAP & blends' },
+  { label: 'Chemical',   color: '#e07820', icon: 'spray-bottle', image: require('@/assets/images/Spayer-Greenv2.png'), href: '/(tabs)/submit-chem', subtitle: 'Herbicides, Fungicides & more' },
 ];
 
 export default function PricingScreen() {
@@ -71,17 +71,17 @@ export default function PricingScreen() {
             {CATEGORIES.map((cat) => (
               <TouchableOpacity
                 key={cat.label}
-                style={styles.card}
+                style={[styles.card, { borderTopColor: cat.color, borderTopWidth: 4 }]}
                 onPress={() => router.push(cat.href as any)}
                 activeOpacity={0.8}
               >
-                <View style={styles.cardIconWrap}>
+                <View style={[styles.cardIconWrap, { backgroundColor: cat.color + '18' }]}>
                   {'image' in cat
-                    ? <Image source={(cat as any).image} style={{ width: 63, height: 63 }} resizeMode="contain" />
-                    : <MaterialCommunityIcons name={cat.icon as any} size={42} color="#2d6a2d" />
+                    ? <Image source={(cat as any).image} style={{ width: 52, height: 52 }} resizeMode="contain" />
+                    : <MaterialCommunityIcons name={cat.icon as any} size={42} color={cat.color} />
                   }
                 </View>
-                <Text style={styles.cardLabel}>{cat.label}</Text>
+                <Text style={[styles.cardLabel, { color: cat.color }]}>{cat.label}</Text>
                 <Text style={styles.cardSub}>{cat.subtitle}</Text>
               </TouchableOpacity>
             ))}
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   sub:                 { fontSize: 14, color: '#777', marginBottom: 20 },
   grid:                { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
   card:                { backgroundColor: '#fff', borderRadius: 14, padding: 18, width: '47%', alignItems: 'center', shadowColor: '#000', shadowOpacity: 0.06, shadowRadius: 6, elevation: 2 },
-  cardIconWrap:        { width: 63, height: 63, alignItems: 'center', justifyContent: 'center', marginBottom: 10 },
+  cardIconWrap:        { width: 68, height: 68, borderRadius: 16, alignItems: 'center', justifyContent: 'center', marginBottom: 12 },
   cardIcon:            { marginBottom: 10 },
   cardLabel:           { fontSize: 17, fontWeight: '700', color: '#1a3c1a', marginBottom: 4, textAlign: 'center' },
   cardSub:             { fontSize: 12, color: '#888', textAlign: 'center', lineHeight: 17 },

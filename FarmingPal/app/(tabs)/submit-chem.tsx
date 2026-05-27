@@ -82,10 +82,11 @@ export default function SubmitChemScreen() {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <AppHeader />
-
+      <View style={styles.hero}>
+        <Text style={styles.heroTitle}>Chemical Prices</Text>
+        <Text style={styles.heroSub}>Herbicides, Fungicides & more</Text>
+      </View>
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-
-        <Text style={styles.pageTitle}>Chemical Price Reporting</Text>
 
         <View style={styles.locationBar}>
           <TouchableOpacity style={styles.backBtn} onPress={() => router.push('/(tabs)/pricing')}>
@@ -216,6 +217,9 @@ export default function SubmitChemScreen() {
 
 const styles = StyleSheet.create({
   container:            { flex: 1, backgroundColor: '#f4f8f4' },
+  hero:                 { backgroundColor: '#e07820', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
+  heroTitle:            { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
+  heroSub:              { fontSize: 14, color: '#fddbb0', textAlign: 'center', lineHeight: 22 },
   content:              { paddingLeft: 12, paddingRight: 24, paddingTop: 24, paddingBottom: 24 },
   pageTitle:            { fontSize: 26, fontWeight: '800', color: '#1a3c1a', marginBottom: 10 },
   locationBar:          { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 },
