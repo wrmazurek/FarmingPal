@@ -217,7 +217,7 @@ export default function SubmitChemScreen() {
 
 const styles = StyleSheet.create({
   container:            { flex: 1, backgroundColor: '#f4f8f4' },
-  hero:                 { backgroundColor: '#e07820', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
+  hero:                 { backgroundColor: '#b35e10', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
   heroTitle:            { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
   heroSub:              { fontSize: 14, color: '#fddbb0', textAlign: 'center', lineHeight: 22 },
   content:              { paddingLeft: 12, paddingRight: 24, paddingTop: 24, paddingBottom: 24 },
