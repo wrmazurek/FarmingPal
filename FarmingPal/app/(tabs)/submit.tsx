@@ -251,9 +251,9 @@ export default function SubmitScreen() {
 
 const styles = StyleSheet.create({
   container:           { flex: 1, backgroundColor: '#f4f8f4' },
-  hero:                { backgroundColor: '#2d6a2d', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
+  hero:                { backgroundColor: '#6B7A2A', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
   heroTitle:           { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
-  heroSub:             { fontSize: 14, color: '#c8e6c8', textAlign: 'center', lineHeight: 22 },
+  heroSub:             { fontSize: 14, color: '#d8e4a0', textAlign: 'center', lineHeight: 22 },
   content:             { paddingLeft: 12, paddingRight: 24, paddingTop: 24, paddingBottom: 24 },
   pageTitle:           { fontSize: 26, fontWeight: '800', color: '#1a3c1a', marginBottom: 10 },
   locationBar:         { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 },

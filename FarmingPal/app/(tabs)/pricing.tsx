@@ -9,7 +9,7 @@ import AppHeader from '@/components/AppHeader';
 import RegionPickerModal from '@/components/RegionPickerModal';
 
 const CATEGORIES = [
-  { label: 'Crop',       color: '#2d6a2d', icon: 'barley',       href: '/(tabs)/submit',       subtitle: 'Cash Price (Bid/Spot)\nCorn, Wheat, Canola & more' },
+  { label: 'Crop',       color: '#6B7A2A', icon: 'barley',       href: '/(tabs)/submit',       subtitle: 'Cash Price (Bid/Spot)\nCorn, Wheat, Canola & more' },
   { label: 'Fuel',       color: '#c8931a', icon: 'gas-station',  href: '/(tabs)/submit-fuel',  subtitle: 'Diesel, Gasoline, Propane' },
   { label: 'Fertilizer', color: '#7a5230', icon: 'sprout',       href: '/(tabs)/submit-fert',  subtitle: 'Urea, Potash, DAP & blends' },
   { label: 'Chemical',   color: '#e07820', icon: 'spray-bottle', image: require('@/assets/images/Spayer-Greenv2.png'), href: '/(tabs)/submit-chem', subtitle: 'Herbicides, Fungicides & more' },
