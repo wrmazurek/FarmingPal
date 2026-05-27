@@ -634,8 +634,9 @@ body {
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .hero-inner  { flex-direction: column; gap: 40px; }
-  .hero-visual { flex: unset; width: 100%; max-width: 360px; }
+  .hero-inner  { flex-direction: column; gap: 24px; }
+  .hero-visual { flex: unset; width: 100%; max-width: 220px; }
+  .iphone { zoom: 0.75; }
   .mission-inner { flex-direction: column; gap: 32px; }
   .steps { flex-direction: column; gap: 24px; }
   .step-arrow { display: none; }
