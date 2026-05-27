@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
   container:            { flex: 1, backgroundColor: '#f4f8f4' },
   hero:                 { backgroundColor: '#4a4a4a', paddingTop: 24, paddingBottom: 28, paddingHorizontal: 20, alignItems: 'center' },
   heroTitle:            { fontSize: 28, fontWeight: '900', color: '#fff', marginBottom: 10 },
-  heroSub:              { fontSize: 14, color: '#fddbb0', textAlign: 'center', lineHeight: 22 },
+  heroSub:              { fontSize: 14, color: '#c8c8c8', textAlign: 'center', lineHeight: 22 },
   content:              { paddingLeft: 12, paddingRight: 24, paddingTop: 24, paddingBottom: 24 },
   pageTitle:            { fontSize: 26, fontWeight: '800', color: '#1a3c1a', marginBottom: 10 },
   locationBar:          { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 },
