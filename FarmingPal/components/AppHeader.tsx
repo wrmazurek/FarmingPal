@@ -66,7 +66,7 @@ export default function AppHeader({ children }: Props) {
           activeOpacity={0.75}
           style={styles.logoBtn}
         >
-          <Image source={LOGO} style={styles.logo} resizeMode="contain" />
+          <Image source={LOGO} style={[styles.logo, isDesktop && styles.logoDesktop]} resizeMode="contain" />
         </TouchableOpacity>
 
         {isDesktop ? (
@@ -236,8 +236,9 @@ const styles = StyleSheet.create({
   row:        { flexDirection: 'row', alignItems: 'center', paddingRight: 4 },
   rowDesktop: { maxWidth: 1140, width: '100%', alignSelf: 'center', paddingRight: 16 },
 
-  logoBtn:    { marginLeft: 12, marginRight: 4 },
-  logo:       { height: 44, width: 80 },
+  logoBtn:       { marginLeft: 12, marginRight: 4 },
+  logo:          { height: 44, width: 80 },
+  logoDesktop:   { height: 64, width: 116 },
 
   /* Desktop nav */
   desktopNav:          { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 4, marginLeft: 16 },
