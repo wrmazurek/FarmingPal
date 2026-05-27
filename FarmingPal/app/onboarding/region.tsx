@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native
 import { useUser } from '@/context/UserContext';
 import { getRegionsByCountry } from '@/constants/regions';
 import { Country, Region } from '@/types';
+import OnboardingHeader from '@/components/OnboardingHeader';
 
 export default function RegionScreen() {
   const { country } = useLocalSearchParams<{ country: Country }>();
@@ -17,7 +18,10 @@ export default function RegionScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Select your province{country === 'US' ? ' / state' : ''}</Text>
+      <OnboardingHeader />
+      <Text style={styles.title}>
+        Select your {country === 'US' ? 'state' : 'province'}
+      </Text>
       <FlatList
         data={regions}
         keyExtractor={(r) => r.code}
@@ -34,10 +38,10 @@ export default function RegionScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff', paddingTop: 64 },
-  title:     { fontSize: 22, fontWeight: '700', color: '#1a3c1a', paddingHorizontal: 24, marginBottom: 24 },
-  list:      { paddingHorizontal: 24 },
-  option:    { flexDirection: 'row', alignItems: 'center', padding: 18, borderRadius: 10, borderWidth: 1.5, borderColor: '#d0e8d0', marginBottom: 12, backgroundColor: '#f6fbf6' },
+  container: { flex: 1, backgroundColor: '#f4f8f4' },
+  title:     { fontSize: 22, fontWeight: '800', color: '#1a3c1a', paddingHorizontal: 24, paddingTop: 28, marginBottom: 16 },
+  list:      { paddingHorizontal: 24, paddingBottom: 32 },
+  option:    { flexDirection: 'row', alignItems: 'center', padding: 18, borderRadius: 10, borderWidth: 1.5, borderColor: '#d0e8d0', marginBottom: 12, backgroundColor: '#fff' },
   code:      { fontSize: 14, fontWeight: '700', color: '#4a7c4a', width: 40 },
   name:      { fontSize: 16, color: '#1a3c1a' },
 });
