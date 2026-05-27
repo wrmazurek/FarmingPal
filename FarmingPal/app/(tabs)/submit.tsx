@@ -77,11 +77,12 @@ export default function SubmitScreen() {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <AppHeader />
-      <View style={styles.hero}>
-        <Text style={styles.heroTitle}>Crop Prices</Text>
-        <Text style={styles.heroSub}>Cash Price (Bid/Spot) · Corn, Wheat, Canola & more</Text>
-      </View>
-      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <ScrollView style={styles.container}>
+        <View style={styles.hero}>
+          <Text style={styles.heroTitle}>Crop Prices</Text>
+          <Text style={styles.heroSub}>Cash Price (Bid/Spot) · Corn, Wheat, Canola & more</Text>
+        </View>
+        <View style={styles.content}>
 
         <View style={styles.locationBar}>
           <TouchableOpacity style={styles.backBtn} onPress={() => router.push('/(tabs)/pricing')}>
@@ -243,6 +244,7 @@ export default function SubmitScreen() {
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Text style={styles.submitButtonText}>Submit Price</Text>
         </TouchableOpacity>
+        </View>
       </ScrollView>
       <SuccessToast visible={toastVisible} message="Price submitted — thank you!" onHide={() => setToastVisible(false)} />
     </KeyboardAvoidingView>

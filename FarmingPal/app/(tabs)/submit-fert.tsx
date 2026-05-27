@@ -69,11 +69,12 @@ export default function SubmitFertScreen() {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <AppHeader />
-      <View style={styles.hero}>
-        <Text style={styles.heroTitle}>Fertilizer Prices</Text>
-        <Text style={styles.heroSub}>Urea, Potash, DAP & blends</Text>
-      </View>
-      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <ScrollView style={styles.container}>
+        <View style={styles.hero}>
+          <Text style={styles.heroTitle}>Fertilizer Prices</Text>
+          <Text style={styles.heroSub}>Urea, Potash, DAP & blends</Text>
+        </View>
+        <View style={styles.content}>
 
         <View style={styles.locationBar}>
           <TouchableOpacity style={styles.backBtn} onPress={() => router.push('/(tabs)/pricing')}>
@@ -170,7 +171,7 @@ export default function SubmitFertScreen() {
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Text style={styles.submitButtonText}>Submit Fertilizer Price</Text>
         </TouchableOpacity>
-
+        </View>
       </ScrollView>
       <SuccessToast visible={toastVisible} message="Fertilizer price submitted — thank you!" onHide={() => setToastVisible(false)} />
     </KeyboardAvoidingView>

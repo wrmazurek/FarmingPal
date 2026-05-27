@@ -82,11 +82,12 @@ export default function SubmitChemScreen() {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <AppHeader />
-      <View style={styles.hero}>
-        <Text style={styles.heroTitle}>Chemical Prices</Text>
-        <Text style={styles.heroSub}>Herbicides, Fungicides & more</Text>
-      </View>
-      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <ScrollView style={styles.container}>
+        <View style={styles.hero}>
+          <Text style={styles.heroTitle}>Chemical Prices</Text>
+          <Text style={styles.heroSub}>Herbicides, Fungicides & more</Text>
+        </View>
+        <View style={styles.content}>
 
         <View style={styles.locationBar}>
           <TouchableOpacity style={styles.backBtn} onPress={() => router.push('/(tabs)/pricing')}>
@@ -208,7 +209,7 @@ export default function SubmitChemScreen() {
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Text style={styles.submitButtonText}>Submit Chemical Price</Text>
         </TouchableOpacity>
-
+        </View>
       </ScrollView>
       <SuccessToast visible={toastVisible} message="Chemical price submitted — thank you!" onHide={() => setToastVisible(false)} />
     </KeyboardAvoidingView>
