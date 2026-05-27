@@ -141,12 +141,14 @@ export default function HomeScreen() {
           <View style={styles.statsRow}>
             <View style={styles.stat}>
               <Text style={styles.statValue}>🌎</Text>
-              <Text style={styles.statLabel}>Canada & USA</Text>
+              <Text style={styles.statLabel}>Canada{'\n'}&amp; USA</Text>
             </View>
+            <View style={styles.statDivider} />
             <View style={styles.stat}>
               <Text style={styles.statValue}>4</Text>
-              <Text style={styles.statLabel}>Price Categories</Text>
+              <Text style={styles.statLabel}>Price{'\n'}Categories</Text>
             </View>
+            <View style={styles.statDivider} />
             <View style={styles.stat}>
               <Text style={styles.statValue}>Free</Text>
               <Text style={styles.statLabel}>Always</Text>
@@ -203,8 +205,9 @@ const styles = StyleSheet.create({
 
   statsCard:    { marginHorizontal: 20, marginTop: 8, marginBottom: 20, backgroundColor: '#1e4d1e', borderRadius: 14, padding: 24 },
   statsTitle:   { fontSize: 17, fontWeight: '800', color: '#fff', marginBottom: 20, textAlign: 'center' },
-  statsRow:     { flexDirection: 'row', justifyContent: 'space-around' },
-  stat:         { alignItems: 'center' },
-  statValue:    { fontSize: 24, fontWeight: '800', color: '#fff' },
-  statLabel:    { fontSize: 12, color: '#a8d8a8', marginTop: 6, textTransform: 'uppercase', letterSpacing: 0.5, textAlign: 'center' },
+  statsRow:     { flexDirection: 'row', alignItems: 'center' },
+  stat:         { flex: 1, alignItems: 'center', paddingHorizontal: 4 },
+  statDivider:  { width: 1, height: 44, backgroundColor: 'rgba(255,255,255,0.18)' },
+  statValue:    { fontSize: 22, fontWeight: '800', color: '#fff' },
+  statLabel:    { fontSize: 11, color: '#a8d8a8', marginTop: 6, textTransform: 'uppercase', letterSpacing: 0.4, textAlign: 'center', lineHeight: 16 },
 });
