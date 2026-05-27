@@ -18,8 +18,19 @@
         <a href="contact.html">Contact</a>
         <a href="#download" class="btn btn-sm">Get the App</a>
       </nav>
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
+  <script>
+    (function(){
+      var btn = document.getElementById('nav-burger');
+      var nav = btn.closest('.nav');
+      btn.addEventListener('click', function(e){ e.stopPropagation(); nav.classList.toggle('nav-open'); });
+      document.addEventListener('click', function(e){ if(!e.target.closest('.nav')) nav.classList.remove('nav-open'); });
+    })();
+  </script>
 
   <!-- MISSION -->
   <section class="mission" id="mission">
