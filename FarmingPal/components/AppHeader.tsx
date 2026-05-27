@@ -241,12 +241,12 @@ const styles = StyleSheet.create({
   logoDesktop:   { height: 64, width: 116 },
 
   /* Desktop nav */
-  desktopNav:          { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 4, marginLeft: 16 },
-  desktopNavItem:      { flexDirection: 'row', alignItems: 'center', gap: 6, paddingVertical: 6, paddingHorizontal: 14, borderRadius: 8 },
+  desktopNav:          { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 },
+  desktopNavItem:      { flexDirection: 'row', alignItems: 'center', gap: 8, paddingVertical: 8, paddingHorizontal: 20, borderRadius: 8 },
   desktopNavItemActive:{ backgroundColor: 'rgba(255,255,255,0.18)' },
   desktopNavLabel:     { fontSize: 15, color: 'rgba(255,255,255,0.8)', fontWeight: '600' },
   desktopNavLabelActive:{ color: '#fff', fontWeight: '700' },
-  desktopRight:        { flexDirection: 'row', alignItems: 'center', gap: 8, marginLeft: 8 },
+  desktopRight:        { flexDirection: 'row', alignItems: 'center', gap: 12 },
   desktopAuthBtn:      { flexDirection: 'row', alignItems: 'center', gap: 6, paddingVertical: 6, paddingHorizontal: 14, borderRadius: 8, borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.35)' },
   desktopAuthLabel:    { fontSize: 14, color: 'rgba(255,255,255,0.8)', fontWeight: '600' },
 
