@@ -556,8 +556,8 @@ body {
   min-width: 200px;
 }
 .store-btn:hover { background: #222; }
-.store-btn-web { background: #2d6a2d; border-color: #2d6a2d; }
-.store-btn-web:hover { background: #245824; }
+.store-btn-web { background: #7a5230; border-color: #7a5230; }
+.store-btn-web:hover { background: #63431f; }
 .store-icon { font-size: 28px; }
 .store-text { display: flex; flex-direction: column; text-align: left; }
 .store-sub  { font-size: 11px; font-weight: 400; color: rgba(255,255,255,.7); }
@@ -634,9 +634,9 @@ body {
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .hero-inner  { flex-direction: column; gap: 24px; }
-  .hero-visual { flex: unset; width: 100%; max-width: 220px; }
-  .iphone { zoom: 0.75; }
+  .hero-inner  { flex-direction: column; gap: 16px; }
+  .hero-visual { flex: unset; width: 100%; max-width: 160px; }
+  .iphone { zoom: 0.55; }
   .mission-inner { flex-direction: column; gap: 32px; }
   .steps { flex-direction: column; gap: 24px; }
   .step-arrow { display: none; }
