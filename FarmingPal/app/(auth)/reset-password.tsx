@@ -7,6 +7,13 @@ import {
 import type { Session } from '@supabase/supabase-js';
 import { supabase, SUPABASE_URL, SUPABASE_ANON } from '@/lib/supabase';
 
+// Parse the URL hash fragment into key-value pairs (web only).
+// Supabase sends recovery tokens as: /reset-password#access_token=...&type=recovery
+function parseHash(): Record<string, string> {
+  if (Platform.OS !== 'web' || typeof window === 'undefined') return {};
+  return Object.fromEntries(new URLSearchParams(window.location.hash.substring(1)));
+}
+
 const LOGO = require('@/assets/images/FP Logo - Trasluscent Background.png');
 
 export default function ResetPasswordScreen() {
@@ -21,33 +28,52 @@ export default function ResetPasswordScreen() {
   const recoverySession = useRef<Session | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
+
+    const resolveSession = (session: Session) => {
+      if (cancelled || recoveryReady.current) return;
+      recoveryReady.current = true;
+      recoverySession.current = session;
+      setReady(true);
+    };
+
+    // Primary: listen for the PASSWORD_RECOVERY event. This fires when Supabase
+    // processes the URL hash after this component mounts.
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'PASSWORD_RECOVERY' && session) {
-        recoveryReady.current  = true;
-        recoverySession.current = session;
-        setReady(true);
-      }
+      if (event === 'PASSWORD_RECOVERY' && session) resolveSession(session);
     });
 
-    // Fallback: if the PASSWORD_RECOVERY event already fired before this listener
-    // registered, getSession() will return the recovery session. We check the
-    // access token expiry is in the future (not an old cached session) by
-    // relying on Supabase having set a fresh session from the URL token.
-    // We guard with recoveryReady so we don't double-set.
-    const timer = setTimeout(() => {
-      if (!recoveryReady.current) {
+    // Supabase (detectSessionInUrl: true) processes the URL hash when the module
+    // is first imported — usually before this component mounts, so the
+    // PASSWORD_RECOVERY event is already gone. getSession() returns it immediately.
+    // We also verify the URL has recovery params so we don't grab a stale login session.
+    const hash = parseHash();
+    const isRecoveryUrl = hash.type === 'recovery' && !!hash.access_token;
+
+    if (isRecoveryUrl) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session) { resolveSession(session); return; }
+        // Hash present but session not yet stored — give Supabase one more tick
+        setTimeout(() => {
+          if (cancelled || recoveryReady.current) return;
+          supabase.auth.getSession().then(({ data: { session: s } }) => {
+            if (s) resolveSession(s);
+          });
+        }, 800);
+      });
+    } else {
+      // Native app path (no URL hash) — wait briefly for the event
+      setTimeout(() => {
+        if (cancelled || recoveryReady.current) return;
         supabase.auth.getSession().then(({ data: { session } }) => {
-          if (session && !recoveryReady.current) {
-            recoveryReady.current = true;
-            setReady(true);
-          }
+          if (session) resolveSession(session);
         });
-      }
-    }, 1500);
+      }, 1500);
+    }
 
     return () => {
+      cancelled = true;
       subscription.unsubscribe();
-      clearTimeout(timer);
     };
   }, []);
 
