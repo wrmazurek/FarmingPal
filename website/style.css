@@ -120,7 +120,12 @@ body {
   gap: 64px;
   align-items: center;
 }
-.hero-inner > :first-child { flex: 1 1 480px; }
+.hero-content {
+  flex: 1 1 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .hero-eyebrow {
   font-size: 13px;
@@ -597,9 +602,9 @@ body {
 .nav-active { color: var(--green) !important; font-weight: 700; }
 
 .contact-hero { background: #3b1f0e; color: #fff; padding: 6px 24px; text-align: center; }
-.contact-hero .section-inner { padding: 45px 24px; }
-.contact-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 900; margin: 0 0 6px; }
-.contact-subtitle { font-size: 18px; color: rgba(255,255,255,.75); max-width: 540px; margin: 0 auto; }
+.contact-hero .section-inner { padding: 34px 24px; }
+.contact-title { font-size: clamp(1.5rem, 3.75vw, 2.25rem); font-weight: 900; margin: 0 0 5px; }
+.contact-subtitle { font-size: 14px; color: rgba(255,255,255,.75); max-width: 540px; margin: 0 auto; }
 
 .contact-section { padding: 64px 24px; background: #f4f8f4; }
 .contact-inner { display: flex; gap: 64px; align-items: flex-start; max-width: 960px; }
@@ -636,6 +641,7 @@ body {
 @media (max-width: 768px) {
   .hero-inner  { flex-direction: column; gap: 16px; }
   .hero-visual { flex: unset; width: 100%; max-width: 160px; }
+  .hero-content { align-items: center; text-align: center; }
   .iphone { zoom: 0.55; }
   .mission-inner { flex-direction: column; gap: 32px; }
   .steps { flex-direction: column; gap: 24px; }
