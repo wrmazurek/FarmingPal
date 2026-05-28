@@ -194,7 +194,7 @@ body {
 
 /* ── Stats strip ── */
 .stats {
-  background: var(--green);
+  background: #3b1f0e;
   color: #fff;
   padding: 32px 24px;
 }

@@ -101,13 +101,13 @@ export default function LoginScreen() {
         <View style={styles.registerSection}>
           <Text style={styles.registerTitle}>New to FarmingPal?</Text>
           <Text style={styles.registerSub}>
-            Create a free account to search prices across all of Canada and the USA, save your farm profile, and access the full marketplace.
+            Sign up to search prices across all of Canada and the USA, save your farm profile, and access the full marketplace.
           </Text>
           <TouchableOpacity
             style={styles.registerBtn}
             onPress={() => router.push('/(auth)/register')}
           >
-            <Text style={styles.registerBtnText}>Create Free Account →</Text>
+            <Text style={styles.registerBtnText}>Sign Up →</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => router.push('/getstarted')}>
             <Text style={styles.howItWorksLink}>See how FarmingPal works first</Text>

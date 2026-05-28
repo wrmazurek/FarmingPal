@@ -106,8 +106,8 @@ export default function RegisterScreen() {
         </TouchableOpacity>
 
         <View style={styles.form}>
-          <Text style={styles.title}>Create Account</Text>
-          <Text style={styles.subtitle}>Free to join — search prices across North America</Text>
+          <Text style={styles.title}>Sign Up</Text>
+          <Text style={styles.subtitle}>Search prices across North America</Text>
 
           {error ? (
             <View style={styles.errorBox}>
@@ -149,7 +149,7 @@ export default function RegisterScreen() {
             onPress={handleRegister}
             disabled={loading}
           >
-            <Text style={styles.buttonText}>{loading ? 'Creating account…' : 'Create Account'}</Text>
+            <Text style={styles.buttonText}>{loading ? 'Signing up…' : 'Sign Up'}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => router.replace('/(auth)/login')}>

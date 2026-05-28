@@ -39,7 +39,7 @@ function AuthGate() {
         <Text style={styles.gateBtnText}>Sign In</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.replace('/(auth)/register')}>
-        <Text style={styles.gateLink}>Create Account →</Text>
+        <Text style={styles.gateLink}>Sign Up →</Text>
       </TouchableOpacity>
     </View>
   );

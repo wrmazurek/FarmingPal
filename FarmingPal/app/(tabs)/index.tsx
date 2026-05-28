@@ -39,7 +39,7 @@ export default function HomeScreen() {
         <View style={styles.ctaCard}>
           <Text style={styles.ctaTitle}>Built for Farmers, by Farmers</Text>
           <Text style={styles.ctaSub}>
-            Crowdsourced pricing, custom farming jobs, equipment listings, land sales, and farm employment — all in one free platform.
+            Crowdsourced pricing, custom farming jobs, equipment listings, land sales, and farm employment — all in one platform.
           </Text>
           <TouchableOpacity style={styles.ctaBtn} onPress={() => router.push('/(tabs)/marketplace' as any)}>
             <Text style={styles.ctaBtnText}>Explore the Platform →</Text>
@@ -53,7 +53,7 @@ export default function HomeScreen() {
               <Text style={styles.missionEyebrow}>Our Mission</Text>
               <Text style={styles.missionHeading}>Leveling the playing field</Text>
               <Text style={styles.missionBody}>
-                Large agribusinesses have always had access to sophisticated market intelligence. Individual farmers haven't — until now. FarmingPal puts that same power in the hands of every grower, for free, no subscription required.
+                Large agribusinesses have always had access to sophisticated market intelligence. Individual farmers haven't — until now. FarmingPal puts that same power in the hands of every grower.
               </Text>
             </View>
             <View style={styles.missionQuote}>
@@ -147,11 +147,6 @@ export default function HomeScreen() {
             <View style={styles.stat}>
               <Text style={styles.statValue}>4</Text>
               <Text style={styles.statLabel}>Price{'\n'}Categories</Text>
-            </View>
-            <View style={styles.statDivider} />
-            <View style={styles.stat}>
-              <Text style={styles.statValue}>Free</Text>
-              <Text style={styles.statLabel}>Always</Text>
             </View>
           </View>
         </View>

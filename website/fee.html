@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — FarmingPal</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .fee-hero {
+      background: #2d6a2d;
+      color: #fff;
+      padding: 64px 24px 56px;
+      text-align: center;
+    }
+    .fee-hero-eyebrow {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #a8d8a8;
+      margin-bottom: 14px;
+    }
+    .fee-hero-title {
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .fee-hero-sub {
+      font-size: 17px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .fee-section {
+      padding: 64px 24px;
+      background: #f4f8f4;
+    }
+    .fee-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .fee-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px 40px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .fee-card-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #c8931a;
+      margin-bottom: 10px;
+    }
+    .fee-card h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #1a3c1a;
+      margin-bottom: 14px;
+    }
+    .fee-card p {
+      font-size: 15px;
+      color: #555;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .fee-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .fee-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+    }
+    .fee-table th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #888;
+      border-bottom: 2px solid #e8f0e8;
+      padding: 10px 14px;
+    }
+    .fee-table td {
+      font-size: 14px;
+      color: #444;
+      border-bottom: 1px solid #f0f4f0;
+      padding: 14px 14px;
+      vertical-align: top;
+    }
+    .fee-table tr:last-child td {
+      border-bottom: none;
+    }
+    .fee-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .fee-badge-current {
+      background: #e8f5e9;
+      color: #2d6a2d;
+    }
+    .fee-badge-future {
+      background: #fff3e0;
+      color: #c8931a;
+    }
+
+    .fee-notice {
+      background: #3b1f0e;
+      border-radius: 16px;
+      padding: 32px 40px;
+      margin-top: 8px;
+    }
+    .fee-notice h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .fee-notice p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.75;
+      margin: 0;
+    }
+    .fee-notice a {
+      color: #e8c89a;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .fee-hero-title { font-size: 28px; }
+      .fee-card { padding: 24px 20px; }
+      .fee-notice { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-link"><img src="assets/logo.png" alt="FarmingPal" class="nav-logo-img" /></a>
+      <nav class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#how-it-works">How It Works</a>
+        <a href="fee.html" class="nav-active">Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="index.html#download" class="btn btn-sm">Get the App</a>
+      </nav>
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <script>
+    (function(){
+      var btn = document.getElementById('nav-burger');
+      var nav = btn.closest('.nav');
+      btn.addEventListener('click', function(e){ e.stopPropagation(); nav.classList.toggle('nav-open'); });
+      document.addEventListener('click', function(e){ if(!e.target.closest('.nav')) nav.classList.remove('nav-open'); });
+    })();
+  </script>
+
+  <!-- HERO -->
+  <section class="fee-hero">
+    <p class="fee-hero-eyebrow">Pricing &amp; Access</p>
+    <h1 class="fee-hero-title">Built on Trust,<br>Not Paywalls</h1>
+    <p class="fee-hero-sub">
+      FarmingPal is a community-powered platform. While we establish and verify the quality standards
+      our services are held to, the app remains accessible at no charge.
+    </p>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="fee-section">
+    <div class="fee-inner">
+
+      <!-- Current access card -->
+      <div class="fee-card">
+        <p class="fee-card-eyebrow">Current Status</p>
+        <h2>No charges while quality standards are being established</h2>
+        <p>
+          FarmingPal is in an active growth phase. We are building out our marketplace services —
+          custom farming operators, equipment listings, land sales, and farm employment — and
+          setting the quality benchmarks that every service provider on the platform is expected to meet.
+        </p>
+        <p>
+          Until those standards are confirmed and consistently met, we are not charging for access
+          to any part of the platform. Farmers can browse prices, submit reports, post jobs, and
+          connect with operators without a subscription or upfront fee.
+        </p>
+
+        <table class="fee-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Crowdsourced pricing — crops, fuel, fertilizer, chemicals</td>
+              <td><span class="fee-badge fee-badge-current">No charge</span></td>
+            </tr>
+            <tr>
+              <td>Anonymous price submission</td>
+              <td><span class="fee-badge fee-badge-current">No charge</span></td>
+            </tr>
+            <tr>
+              <td>Account sign-up and farm profile</td>
+              <td><span class="fee-badge fee-badge-current">No charge</span></td>
+            </tr>
+            <tr>
+              <td>Custom farming job board</td>
+              <td><span class="fee-badge fee-badge-current">No charge</span></td>
+            </tr>
+            <tr>
+              <td>Equipment &amp; land listings</td>
+              <td><span class="fee-badge fee-badge-current">No charge</span></td>
+            </tr>
+            <tr>
+              <td>Farm employment postings</td>
+              <td><span class="fee-badge fee-badge-current">No charge</span></td>
+            </tr>
+            <tr>
+              <td>Premium marketplace features</td>
+              <td><span class="fee-badge fee-badge-future">To be announced</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Our commitment card -->
+      <div class="fee-card">
+        <p class="fee-card-eyebrow">Our Commitment</p>
+        <h2>Crowdsourced pricing will always be accessible</h2>
+        <p>
+          The core of FarmingPal is community price reporting — farmers sharing what they see at
+          the elevator, the fuel pump, and the co-op so that every grower has access to the same
+          market intelligence that large agribusinesses take for granted.
+        </p>
+        <p>
+          Regardless of any future pricing changes to premium services, crowdsourced price
+          browsing and submission will remain accessible to every farmer on the platform.
+          That is the foundation this community is built on, and we will not change it.
+        </p>
+      </div>
+
+      <!-- What changes card -->
+      <div class="fee-card">
+        <p class="fee-card-eyebrow">Looking Ahead</p>
+        <h2>What may change — and how we'll handle it</h2>
+        <p>
+          As the marketplace grows, certain premium features may carry a fee. These could include
+          priority placement for service providers, verified operator badges, advanced analytics,
+          or tools designed specifically for commercial operators and agribusinesses.
+        </p>
+        <p>
+          Any fee changes will be communicated well in advance. We will never silently introduce
+          charges to features that were previously accessible, and existing users will always
+          receive appropriate notice before any billing begins.
+        </p>
+      </div>
+
+      <!-- Notice -->
+      <div class="fee-notice">
+        <h3>Questions about pricing?</h3>
+        <p>
+          If you have specific questions about how pricing may affect your use of FarmingPal,
+          reach out directly — we are happy to explain where things stand.
+          <br /><br />
+          <a href="contact.html">Contact us →</a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <img src="assets/logo.png" alt="FarmingPal" class="footer-logo-img" />
+      <p class="footer-tagline">Your Farm. Your Community. Your Data.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="fee.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+        <a href="privacy.html">Privacy Policy</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 FarmingPal. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

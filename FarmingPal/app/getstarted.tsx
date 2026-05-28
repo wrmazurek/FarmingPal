@@ -25,7 +25,7 @@ const STEPS = [
     step: '4',
     icon: '🔍',
     title: 'Search Across North America',
-    desc: 'Create a free account to search and compare prices across all regions in Canada and the USA.',
+    desc: 'Sign up to search and compare prices across all regions in Canada and the USA.',
   },
   {
     step: '5',
@@ -47,7 +47,7 @@ export default function GetStartedScreen() {
         <View style={styles.hero}>
           <Text style={styles.heroTitle}>How FarmingPal Works</Text>
           <Text style={styles.heroSub}>
-            Built by farmers, for farmers. Here's everything you can do with FarmingPal — for free.
+            Built by farmers, for farmers. Here's everything you can do with FarmingPal.
           </Text>
         </View>
 
@@ -67,7 +67,7 @@ export default function GetStartedScreen() {
 
         {/* Value prop */}
         <View style={styles.valueCard}>
-          <Text style={styles.valueTitle}>Always Free. Always Farmer-First.</Text>
+          <Text style={styles.valueTitle}>Always Farmer-First.</Text>
           <Text style={styles.valueText}>
             FarmingPal is a community-powered platform. Your submissions help thousands of farmers across North America make smarter purchasing and selling decisions. No subscription, no paywall — ever.
           </Text>
@@ -76,9 +76,9 @@ export default function GetStartedScreen() {
         {/* CTA */}
         <View style={styles.ctaSection}>
           <Text style={styles.ctaTitle}>Ready to get started?</Text>
-          <Text style={styles.ctaSub}>Create your free account and unlock full access in under a minute.</Text>
+          <Text style={styles.ctaSub}>Create your account and unlock full access in under a minute.</Text>
           <TouchableOpacity style={styles.registerBtn} onPress={() => router.push('/(auth)/register')}>
-            <Text style={styles.registerBtnText}>Create Free Account →</Text>
+            <Text style={styles.registerBtnText}>Sign Up →</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.loginLink} onPress={() => router.push('/(auth)/login')}>
             <Text style={styles.loginLinkText}>Already have an account? Sign in</Text>

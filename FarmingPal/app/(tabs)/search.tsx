@@ -47,10 +47,10 @@ function AuthGate() {
   return (
     <View style={styles.gateContainer}>
       <Text style={styles.gateIcon}>🔍</Text>
-      <Text style={styles.gateTitle}>Create a free account to search prices</Text>
+      <Text style={styles.gateTitle}>Sign up to search prices</Text>
       <Text style={styles.gateSub}>Search by crop and region across all of North America.</Text>
       <TouchableOpacity style={styles.gateButton} onPress={() => router.push('/(auth)/register')}>
-        <Text style={styles.gateButtonText}>Create Account</Text>
+        <Text style={styles.gateButtonText}>Sign Up</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => router.push('/(auth)/login')}>
         <Text style={styles.gateLink}>Already have an account? Sign in</Text>

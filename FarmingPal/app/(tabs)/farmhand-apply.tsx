@@ -110,7 +110,7 @@ export default function FarmhandApplyScreen() {
         </TouchableOpacity>
         {!isAuthenticated && (
           <TouchableOpacity style={styles.signUpPrompt} onPress={() => router.push('/(auth)/register' as any)}>
-            <Text style={styles.signUpPromptText}>Create an account to save your resume and apply faster next time →</Text>
+            <Text style={styles.signUpPromptText}>Sign up to save your resume and apply faster next time →</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -197,7 +197,7 @@ export default function FarmhandApplyScreen() {
 
           {!isAuthenticated && (
             <Text style={styles.saveHint}>
-              <Text style={styles.saveHintLink} onPress={() => router.push('/(auth)/register' as any)}>Create a free account</Text>
+              <Text style={styles.saveHintLink} onPress={() => router.push('/(auth)/register' as any)}>Sign up</Text>
               {' '}to save your resume and apply to future jobs with one tap.
             </Text>
           )}
