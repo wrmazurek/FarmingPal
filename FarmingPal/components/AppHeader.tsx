@@ -9,13 +9,14 @@ import { useJobBoard } from '@/context/JobBoardContext';
 const LOGO = require('@/assets/images/FP Logo - Trasluscent Background.png');
 
 const NAV_ITEMS_GUEST = [
-  { label: 'Report Prices', icon: 'cash-multiple', href: '/(tabs)/pricing'     },
-  { label: 'Marketplace',   icon: 'store',         href: '/(tabs)/marketplace' },
+  { label: 'Report Prices',  icon: 'cash-multiple',  href: '/(tabs)/pricing'     },
+  { label: 'Marketplace',    icon: 'store',           href: '/(tabs)/marketplace' },
 ];
 
 const NAV_ITEMS_AUTH = [
-  { label: 'Prices',      icon: 'cash-multiple', href: '/(tabs)/pricing'     },
-  { label: 'Marketplace', icon: 'store',         href: '/(tabs)/marketplace' },
+  { label: 'Search Prices',  icon: 'magnify',         href: '/(tabs)/search'      },
+  { label: 'Report Prices',  icon: 'cash-multiple',   href: '/(tabs)/pricing'     },
+  { label: 'Marketplace',    icon: 'store',           href: '/(tabs)/marketplace' },
 ];
 
 const MARKETPLACE_PATHS = [
