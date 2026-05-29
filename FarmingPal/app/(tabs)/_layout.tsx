@@ -16,10 +16,13 @@ export default function TabLayout() {
       <Tabs.Screen name="service-register"  />
       <Tabs.Screen name="buysell"           />
       <Tabs.Screen name="submit"            />
+      <Tabs.Screen name="submit-commodity"  />
       <Tabs.Screen name="submit-fuel"       />
       <Tabs.Screen name="submit-fert"       />
       <Tabs.Screen name="submit-chem"       />
+      <Tabs.Screen name="submit-livestock"  />
       <Tabs.Screen name="search"            />
+      <Tabs.Screen name="search-livestock"  />
       <Tabs.Screen name="profile"           />
       <Tabs.Screen name="job-board"         />
       <Tabs.Screen name="job-detail"        />

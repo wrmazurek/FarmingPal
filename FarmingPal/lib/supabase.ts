@@ -208,3 +208,16 @@ export interface DbJobMessage {
   sent_at:     string;
   read_at:     string | null;
 }
+
+export interface DbLivestockSubmission {
+  id:            string;
+  livestock_id:  string;
+  price:         number;
+  currency:      DbCurrency;
+  buyer_name:    string;
+  district_code: string;
+  region_code:   string;
+  country:       DbCountry;
+  submitted_by:  string | null;
+  submitted_at:  string;
+}

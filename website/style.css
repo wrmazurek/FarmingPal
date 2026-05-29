@@ -558,11 +558,11 @@ body {
   font-size: 18px;
   font-weight: 700;
   transition: background .15s;
-  min-width: 200px;
+  width: 220px;
 }
 .store-btn:hover { background: #222; }
-.store-icon { font-size: 28px; }
-.store-logo-img { height: 32px; width: auto; object-fit: contain; }
+.store-icon { font-size: 28px; line-height: 1; width: 28px; text-align: center; }
+.store-logo-img { height: 28px; width: 28px; object-fit: contain; }
 .store-text { display: flex; flex-direction: column; text-align: left; }
 .store-sub  { font-size: 11px; font-weight: 400; color: rgba(255,255,255,.7); }
 .download-web-hint { margin-top: 20px; font-size: 15px; color: rgba(255,255,255,.7); }
