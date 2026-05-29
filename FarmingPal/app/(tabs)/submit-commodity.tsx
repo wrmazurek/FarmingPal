@@ -381,9 +381,6 @@ export default function SubmitCommodityScreen() {
                 <Text style={styles.submitBtnText}>Submit Livestock Price</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.browseLink} onPress={() => router.push('/(tabs)/search-livestock' as any)}>
-                <Text style={styles.browseLinkText}>Browse livestock prices →</Text>
-              </TouchableOpacity>
             </>
           )}
 
