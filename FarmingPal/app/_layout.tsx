@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Platform } from 'react-native';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
@@ -12,9 +13,21 @@ function RouteGuard() {
   const segments = useSegments();
   const router = useRouter();
 
-  // Global PASSWORD_RECOVERY listener — catches the Supabase event no matter
-  // which screen the SPA boots on, and navigates to the reset-password screen.
+  // On web: check the URL hash immediately for a recovery token.
+  // The SPA rewrite means the app always boots at root, so by the time any
+  // screen mounts the PASSWORD_RECOVERY event may have already fired.
+  // Checking the hash directly on mount is more reliable than the event alone.
   useEffect(() => {
+    if (Platform.OS === 'web' && typeof window !== 'undefined') {
+      const hash = new URLSearchParams(window.location.hash.substring(1));
+      if (hash.get('type') === 'recovery' && hash.get('access_token')) {
+        router.replace('/(auth)/reset-password' as any);
+        return;
+      }
+    }
+
+    // Fallback: listen for PASSWORD_RECOVERY event (fires after Supabase
+    // processes the hash — reliable when the listener registers in time).
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'PASSWORD_RECOVERY') {
         router.replace('/(auth)/reset-password' as any);
