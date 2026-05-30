@@ -325,6 +325,16 @@ export default function SearchScreen() {
     <View style={styles.container}>
       <AppHeader />
 
+      {/* Category toggle */}
+      <View style={styles.categoryToggle}>
+        <TouchableOpacity style={[styles.catBtn, styles.catBtnActive]}>
+          <Text style={[styles.catBtnText, styles.catBtnTextActive]}>🌾 Grain</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.catBtn} onPress={() => router.push('/(tabs)/search-livestock' as any)}>
+          <Text style={styles.catBtnText}>🐄 Livestock</Text>
+        </TouchableOpacity>
+      </View>
+
       {/* Location filter bar */}
       <View style={styles.filterBar}>
         <View style={styles.countryToggle}>
@@ -552,6 +562,13 @@ export default function SearchScreen() {
 
 const styles = StyleSheet.create({
   container:              { flex: 1, backgroundColor: '#f4f8f4' },
+
+  // Category toggle
+  categoryToggle:         { flexDirection: 'row', backgroundColor: '#1a3c1a', paddingHorizontal: 16, paddingVertical: 8, gap: 8 },
+  catBtn:                 { flex: 1, paddingVertical: 8, borderRadius: 8, alignItems: 'center', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.25)' },
+  catBtnActive:           { backgroundColor: '#6B7A2A', borderColor: '#6B7A2A' },
+  catBtnText:             { fontSize: 14, fontWeight: '700', color: 'rgba(255,255,255,0.65)' },
+  catBtnTextActive:       { color: '#fff' },
 
   // Location filter bar
   filterBar:              { flexDirection: 'row', alignItems: 'flex-start', gap: 8, backgroundColor: '#fff', paddingVertical: 10, paddingHorizontal: 12, borderBottomWidth: 1, borderBottomColor: '#e8f0e8', zIndex: 10 },

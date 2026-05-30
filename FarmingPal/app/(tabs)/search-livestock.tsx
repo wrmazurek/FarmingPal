@@ -243,10 +243,14 @@ export default function SearchLivestockScreen() {
     <View style={styles.container}>
       <AppHeader />
 
-      {/* Hero banner */}
-      <View style={[styles.heroBanner, { backgroundColor: HERO_COLOR }]}>
-        <Text style={styles.heroTitle}>Livestock Prices</Text>
-        <Text style={styles.heroSub}>per cwt · Beef · Hogs · Sheep · Dairy · Poultry</Text>
+      {/* Category toggle */}
+      <View style={styles.categoryToggle}>
+        <TouchableOpacity style={styles.catBtn} onPress={() => router.push('/(tabs)/search' as any)}>
+          <Text style={styles.catBtnText}>🌾 Grain</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.catBtn, styles.catBtnActive]}>
+          <Text style={[styles.catBtnText, styles.catBtnTextActive]}>🐄 Livestock</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Location filter bar */}
@@ -421,6 +425,12 @@ export default function SearchLivestockScreen() {
 
 const styles = StyleSheet.create({
   container:              { flex: 1, backgroundColor: '#f4f8f4' },
+
+  categoryToggle:         { flexDirection: 'row', backgroundColor: '#1a3c1a', paddingHorizontal: 16, paddingVertical: 8, gap: 8 },
+  catBtn:                 { flex: 1, paddingVertical: 8, borderRadius: 8, alignItems: 'center', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.25)' },
+  catBtnActive:           { backgroundColor: HERO_COLOR, borderColor: HERO_COLOR },
+  catBtnText:             { fontSize: 14, fontWeight: '700', color: 'rgba(255,255,255,0.65)' },
+  catBtnTextActive:       { color: '#fff' },
 
   heroBanner:             { paddingVertical: 14, paddingHorizontal: 16, alignItems: 'center' },
   heroTitle:              { fontSize: 20, fontWeight: '900', color: '#fff' },
