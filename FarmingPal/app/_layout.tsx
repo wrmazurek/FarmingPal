@@ -4,12 +4,24 @@ import { StatusBar } from 'expo-status-bar';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { UserProvider, useUser } from '@/context/UserContext';
 import { JobBoardProvider } from '@/context/JobBoardContext';
+import { supabase } from '@/lib/supabase';
 
 function RouteGuard() {
   const { onboardingComplete, isLoading: userLoading } = useUser();
   const { isLoading: authLoading } = useAuth();
   const segments = useSegments();
   const router = useRouter();
+
+  // Global PASSWORD_RECOVERY listener — catches the Supabase event no matter
+  // which screen the SPA boots on, and navigates to the reset-password screen.
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+      if (event === 'PASSWORD_RECOVERY') {
+        router.replace('/(auth)/reset-password' as any);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     if (userLoading || authLoading) return;
