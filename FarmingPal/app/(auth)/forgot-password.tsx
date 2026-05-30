@@ -23,12 +23,14 @@ export default function ForgotPasswordScreen() {
     }
     setLoading(true);
 
-    // Expo Router groups like (auth) are transparent in the URL — the actual
-    // browser path is /reset-password, not /(auth)/reset-password.
-    // Supabase will reject any redirectTo not in its Redirect URLs allowlist.
-    const redirectTo = typeof window !== 'undefined'
+    // Always redirect to the production reset-password screen.
+    // On localhost we use the local origin; everywhere else we use the
+    // production URL explicitly so Supabase never falls back to the Site URL.
+    const isLocalhost = typeof window !== 'undefined' &&
+      window.location.origin.includes('localhost');
+    const redirectTo = isLocalhost
       ? `${window.location.origin}/reset-password`
-      : undefined;
+      : 'https://www.farmingpal-app.com/reset-password';
 
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), {
       redirectTo,
