@@ -163,6 +163,7 @@ function LineChart({ results }: { results: DbLivestockSubmission[] }) {
 // ─── Main screen ──────────────────────────────────────────────────────────────
 
 export default function SearchLivestockScreen() {
+  const router = useRouter();
   const { isAuthenticated } = useAuth();
   const { profile } = useUser();
 
